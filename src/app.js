@@ -1,15 +1,18 @@
 const express = require('express');
-
-// ...
+const { loginRouter } = require('./routers/loginRouter');
 
 const app = express();
+
+// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// ...
 
 // não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
   response.send();
 });
 
-app.use(express.json());
+app.use('/login', loginRouter);
 
 // ...
 

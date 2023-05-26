@@ -4,28 +4,28 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         primaryKey: true,
         autoIncrement: true
       },
-      displayName: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      image: DataTypes.STRING,
+      displayName: {
+        type: DataTypes.STRING,
+      },
+      email: {
+        type: DataTypes.STRING,
+      },
+      password: {
+        type: DataTypes.STRING,
+      },
+      image: {
+        type: DataTypes.STRING,
+      },
     },
     {
-      tableName: 'users',
       underscored: true,
+      tableName: 'users',
       timestamps: false,
-    },
+    }
   );
-
-  User.associate = (models) => {
-    User.hasMany(models.BlogPost,{
-      foreignKey: 'userId',
-      as: 'blog_posts'
-    });
-  };
 
   return User;
 };
