@@ -1,9 +1,9 @@
 const express = require('express');
 const { loginRouter } = require('./routers/loginRouter');
+// const { userRouter } = require('./routers/userRouter');
 
 const app = express();
 
-// app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // ...
 
@@ -13,6 +13,7 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/login', loginRouter);
+// app.use('/user', userRouter);
 
 // ...
 
