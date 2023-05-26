@@ -7,6 +7,12 @@ const getUsers = async () => {
     return users;
 };
 
+const createUser = async (user) => {
+    const newUser = db.User.create(user);
+    return newUser;
+};
+
 module.exports = {
     getUsers,
+    createUser,
 };
