@@ -1,10 +1,5 @@
 const { createToken } = require('../auth/auth');
-const userService = require('../services/userService');
-
-const getAll = async (_req, res) => {
-    const users = await userService.getAll();
-    return res.status(200).json(users);
-};
+const loginService = require('../services/loginService');
 
 const login = async (req, res) => {
     // console.log(req.body);
@@ -13,7 +8,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Some required fields are missing' });
     }
 
-    const users = await userService.getOne(email);
+    const users = await loginService.getOne(email);
     // console.log(users);
     if (!users) {
       return res.status(400).json({ message: 'Invalid fields' });
@@ -24,6 +19,5 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
   login,
 };

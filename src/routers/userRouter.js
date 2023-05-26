@@ -1,11 +1,12 @@
-// const express = require('express');
+const express = require('express');
 
-// const userRouter = express.Router();
+const userRouter = express.Router();
 
-// const userController = require('../controllers/userController');
+const userController = require('../controllers/userController');
+const validateJWT = require('../middlewares/validateJWT');
 
-// userRouter.get('/', userController.getAll);
+userRouter.get('/', validateJWT, userController.getUsers);
 
-// module.exports = {
-//     userRouter,
-// };
+module.exports = {
+    userRouter,
+};
