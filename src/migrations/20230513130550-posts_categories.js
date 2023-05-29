@@ -11,6 +11,8 @@ module.exports = {
           key: 'id'
         },
         primaryKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE' 
       },
       category_id: {
         type: Sequelize.INTEGER,
@@ -20,6 +22,8 @@ module.exports = {
           key: 'id'
         },
         primaryKey: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE' 
       }
     });
   },

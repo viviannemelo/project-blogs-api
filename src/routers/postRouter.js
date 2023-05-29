@@ -7,6 +7,7 @@ const validateJWT = require('../middlewares/validateJWT');
 const validatePost = require('../middlewares/validatePost');
 
 postRouter.get('/', validateJWT, postController.getPosts);
+postRouter.get('/:id', validateJWT, postController.getPostById);
 postRouter.post('/', validateJWT, validatePost, postController.createPost);
 
 module.exports = {

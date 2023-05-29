@@ -1,7 +1,18 @@
 const { verifyToken } = require('../auth/auth');
 
 const validateJWT = async (req, res, next) => {
-    try {
+//     const { authorization } = req.headers;
+//     if (!authorization) return res.status(401).json({ message: 'Token not found' });
+
+//     const data = verifyToken(authorization);
+//     req.payload = data;
+
+//     if (!data) {
+//         return res.status(401).json({ message: 'Expired or invalid token' });
+//     }
+
+//    next();
+   try {
     const { authorization } = req.headers;
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
 
@@ -10,7 +21,7 @@ const validateJWT = async (req, res, next) => {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }
     
-    return next();
+    next();
 };
 
 module.exports = validateJWT;
