@@ -32,37 +32,6 @@ const createUser = async (req, res) => {
   } catch (e) {
       return e;
   }
-
-  // const { email } = req.body;
-
-  // const existingUser = await userService.getUserByEmail(email);
-  // if (existingUser) {
-  //     return res.status(409).json({ message: 'User already registered' });
-  // }
-
-  // const newUser = await userService.createUser({ displayName, email, password });
-  // if (newUser) {
-  //   const token = createToken(newUser);
-  //   return res.status(201).json({ token });
-  // }
-
-    // const {
-    //   displayName,
-    //   email,
-    //   password,
-    //   image,
-    // } = req.body;
-
-    // const existingUser = await userService.createUser(
-    //   displayName,
-    //   email,
-    //   password,
-    //   image,
-    // );
-
-    // if (existingUser.message) { 
-    //   return res.status(409).json({ message: existingUser.message });
-    // }
 };
 
 module.exports = {

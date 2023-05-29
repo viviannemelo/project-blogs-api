@@ -12,8 +12,8 @@ const createCategory = async (req, res) => {
         return res.status(400).json({ message: '"name" is required' });
     }
 
-    const user = await categoryService.createCategory({ name });
-    return res.status(201).json(user);
+    const newCategory = await categoryService.createCategory(name);
+    return res.status(201).json(newCategory);
 };
 
 module.exports = {
