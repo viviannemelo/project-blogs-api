@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const jwtConfig = {
-  expiresIn: '10m',
+  expiresIn: '1h',
   algorithm: 'HS256',
 };
 
