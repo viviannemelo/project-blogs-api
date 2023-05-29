@@ -18,14 +18,14 @@ const getPosts = async () => {
     return posts;
 };
 
-const categoryById = async (categoryId) => {
-    const categoriesIds = categoryId.map(
-        async (id) => db.Category.findByPk(id),
-    );
+// const categoryById = async (categoryId) => {
+//     const categoriesIds = categoryId.map(
+//         async (id) => db.Category.findByPk(id),
+//     );
 
-    const promises = await Promise.all(categoriesIds);
-    return promises;
-};
+//     const promises = await Promise.all(categoriesIds);
+//     return promises;
+// };
 
 const createPost = async ({ title, content, categoryIds }) => {
     const newPost = await db.BlogPost.create({
@@ -41,6 +41,6 @@ const createPost = async ({ title, content, categoryIds }) => {
 
 module.exports = {
     getPosts,
-    categoryById,
+    // categoryById,
     createPost,
 };

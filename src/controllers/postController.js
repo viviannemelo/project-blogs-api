@@ -1,4 +1,5 @@
 const postService = require('../services/postService');
+const { validateToken } = require('../auth/auth');
 
 const getPosts = async (req, res) => {
     const posts = await postService.getPosts();
@@ -6,15 +7,17 @@ const getPosts = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-    const { title, content, categoryIds } = req.body;
-    
-    const validateCategory = await postService.categoryById(categoryIds);
-    if (validateCategory !== null) {
-        return res.status(400).json({ message: 'one or more "categoryIds" not found' });
-    }
+    try {
+        const { title, content, categoryIds } = req.body;
+        const { authorization: token } = req.headers;
+        const data = validateToken(token);
 
-    const post = await postService.createPost({ title, content, categoryIds });
-    return res.status(201).json(post.dataValues);
+        const userId = data.user.id;
+        const post = await postService.createPost(userId, { title, content, categoryIds });
+        return res.status(201).json(post.dataValues);
+      } catch (e) {
+        return e;
+      }
 };
 
 module.exports = {
