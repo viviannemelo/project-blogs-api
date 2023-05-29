@@ -11,7 +11,9 @@ const getUserById = async (id) => {
     const user = await db.User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
     if (!user) return { type: 'NOT_FOUND' };
     return user;
-  };
+};
+
+const getUserByEmail = (email) => db.User.findOne({ where: { email } });
 
 const createUser = async (user) => {
     const newUser = db.User.create(user);
@@ -21,5 +23,6 @@ const createUser = async (user) => {
 module.exports = {
     getUsers,
     getUserById,
+    getUserByEmail,
     createUser,
 };

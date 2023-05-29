@@ -1,4 +1,4 @@
-module.exports = (req, res, next) => {
+const validateUser = (req, res, next) => {
     const { displayName } = req.body;
     if (displayName.length < 8) {
         return res.status(400).json({
@@ -18,3 +18,5 @@ module.exports = (req, res, next) => {
     }
     next();
 };
+
+module.exports = validateUser;

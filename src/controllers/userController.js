@@ -18,26 +18,50 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-        const newUser = await userService.createUser(req.body);
-        const token = createToken(req.body);
-        if (newUser) return res.status(201).json({ token });
+  try {
+    const { email } = req.body;
+    const existingUser = await userService.getUserByEmail(email);
+    if (existingUser !== null) {
+      return res.status(409).json({ message: 'User already registered' });
+    }
 
-        return res.status(409).json({ message: 'User already registered' });
-    // const userValid = await userService.createUser;
-    // if (userValid !== null) {
-    //     return res.status(409).json({ message: 'User already registered' });
-    // }
-    // const { email } = req.body;
-    // const token = await createToken(email);
-    // return res.status(201).json({ token });
-    // if (user) {
-    //     try {
-    //         const { email } = req.body;
-    //         const token = createToken(email);
-    //         return res.status(201).json({ token });
-    //     } catch (e) {
-    //         return res.status(500).json({ message: `${e}` });
-    //     }
+    const newUser = await userService.createUser(req.body);
+    const { password: _password, ...newUserWithoutPassword } = newUser.dataValues;
+    const token = createToken(newUserWithoutPassword);
+    return res.status(201).json({ token });
+  } catch (e) {
+      return e;
+  }
+
+  // const { email } = req.body;
+
+  // const existingUser = await userService.getUserByEmail(email);
+  // if (existingUser) {
+  //     return res.status(409).json({ message: 'User already registered' });
+  // }
+
+  // const newUser = await userService.createUser({ displayName, email, password });
+  // if (newUser) {
+  //   const token = createToken(newUser);
+  //   return res.status(201).json({ token });
+  // }
+
+    // const {
+    //   displayName,
+    //   email,
+    //   password,
+    //   image,
+    // } = req.body;
+
+    // const existingUser = await userService.createUser(
+    //   displayName,
+    //   email,
+    //   password,
+    //   image,
+    // );
+
+    // if (existingUser.message) { 
+    //   return res.status(409).json({ message: existingUser.message });
     // }
 };
 
