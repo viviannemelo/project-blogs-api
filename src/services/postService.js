@@ -1,5 +1,23 @@
 const db = require('../models');
 
+const getPosts = async () => {
+    const posts = db.BlogPost.findAll({
+        include: [
+            {
+                model: db.User,
+                as: 'user',
+                attributes: { exclude: ['password'] },
+            },
+            {
+                model: db.Category,
+                as: 'categories',
+                through: { attributes: [] },
+            },
+        ],
+    });
+    return posts;
+};
+
 const categoryById = async (categoryId) => {
     const categoriesIds = categoryId.map(
         async (id) => db.Category.findByPk(id),
@@ -22,6 +40,7 @@ const createPost = async ({ title, content, categoryIds }) => {
 };
 
 module.exports = {
+    getPosts,
     categoryById,
     createPost,
 };
