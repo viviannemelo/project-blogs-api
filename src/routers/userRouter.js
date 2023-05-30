@@ -9,6 +9,7 @@ const validateUser = require('../middlewares/validateUser');
 userRouter.get('/', validateJWT, userController.getUsers);
 userRouter.get('/:id', validateJWT, userController.getUserById);
 userRouter.post('/', validateUser, userController.createUser);
+userRouter.delete('/me', validateJWT, userController.deleteUser);
 
 module.exports = {
     userRouter,

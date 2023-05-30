@@ -28,8 +28,27 @@ const createPost = async (req, res) => {
       }
 };
 
+const updatePost = async (req, res) => {
+  const { id: userId } = req.params;
+  const { title, content } = req.body;
+
+  const postUpdate = await postService.updatePost(Number(userId), title, content);
+
+  if (postUpdate === 'notfound') return res.status(404).json({ message: 'Post does not exist' }); 
+  return res.status(200).json(postUpdate);
+};
+
+const deletePost = async (req, res) => {  
+  const { id } = req.params;
+  const { type, message } = await postService.deletePost(Number(id));
+  if (type) return res.status(type).json({ message });
+  return res.status(204).end();
+};
+
 module.exports = {
     getPosts,
     getPostById,
     createPost,
+    updatePost,
+    deletePost,
 };

@@ -20,9 +20,17 @@ const createUser = async (user) => {
     return newUser;
 };
 
+const deleteUser = async (id) => {
+    await db.User.destroy({
+        where: { id },
+    });
+    return { type: null, message: '' };
+};  
+
 module.exports = {
     getUsers,
     getUserById,
     getUserByEmail,
     createUser,
+    deleteUser,
 };
