@@ -4,14 +4,28 @@ const postRouter = express.Router();
 
 const postController = require('../controllers/postController');
 const validateJWT = require('../middlewares/validateJWT');
-const validatePost = require('../middlewares/validatePost');
-const validateUpdatePost = require('../middlewares/validateUpdatePost');
+const {
+    validatePostId,
+    validateUserAuthorized,
+    validateContent,
+} = require('../middlewares/validatePost');
 
 postRouter.get('/', validateJWT, postController.getPosts);
 postRouter.get('/:id', validateJWT, postController.getPostById);
-postRouter.post('/', validateJWT, validatePost, postController.createPost);
-postRouter.put('/:id', validateJWT, validateUpdatePost, postController.updatePost);
-postRouter.delete('/:id', validateJWT, validatePost, validateUpdatePost, postController.deletePost);
+postRouter.post('/', validateJWT, validatePostId, postController.createPost);
+postRouter.put(
+    '/:id',
+    validateJWT,
+    validateContent,
+    validateUserAuthorized,
+    postController.updatePost,
+);
+postRouter.delete(
+    '/:id',
+    validateJWT,
+    validateUserAuthorized,
+    postController.deletePost,
+    );
 
 module.exports = {
     postRouter,

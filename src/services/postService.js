@@ -50,8 +50,8 @@ const createPost = async (userId, { title, content, categoryIds }) => {
     return newPost;
 };
 
-const updatePost = async (id, title, content) => {
-    await BlogPost.update({ title, content }, { where: { id } });
+const updatePost = async (id, infos) => {
+    await BlogPost.update(infos, { where: { id } });
     const post = await getPostById(id);
     return post;
 };

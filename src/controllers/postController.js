@@ -30,10 +30,10 @@ const createPost = async (req, res) => {
 
 const updatePost = async (req, res) => {
   const { id: userId } = req.params;
-  const { title, content } = req.body;
+  const newContent = req.body;
+  await updatePost(userId, newContent);
 
-  const postUpdate = await postService.updatePost(Number(userId), title, content);
-
+  const postUpdate = await getPostById(userId);
   if (postUpdate === 'notfound') return res.status(404).json({ message: 'Post does not exist' }); 
   return res.status(200).json(postUpdate);
 };
