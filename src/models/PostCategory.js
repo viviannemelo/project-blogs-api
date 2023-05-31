@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
         postId: {
           type: DataTypes.INTEGER,
           primaryKey: true,
-          autoIncrement: true
+          allowNull: false,
         },
         categoryId: {
           type: DataTypes.STRING,
+          primaryKey: true,
+          allowNull: false,
         },
       },
       {

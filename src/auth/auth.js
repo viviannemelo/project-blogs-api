@@ -5,9 +5,9 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
+const secret = process.env.JWT_SECRET || 'secretJWT';
 
-const createToken = (email) => jwt.sign({ email }, secret, jwtConfig);
+const createToken = (user) => jwt.sign({ user }, secret, jwtConfig);
 
 const verifyToken = (token) => jwt.verify(token, secret, jwtConfig);
 

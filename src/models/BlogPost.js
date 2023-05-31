@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
         id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
-          autoIncrement: true
+          autoIncrement: true,
+          allowNull: false,
         },
         title: {
           type: DataTypes.STRING,
@@ -14,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
         },
         published: {
-          type: DataTypes.STRING,
+          type: DataTypes.DATE,
         },
         updated: {
-          type: DataTypes.STRING,
+          type: DataTypes.DATE,
         },
         userId: {
-            type: DataTypes.STRING,
-          },
+          type: DataTypes.INTEGER,
+        },
       },
       {
         underscored: true,

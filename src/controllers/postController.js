@@ -1,5 +1,5 @@
 const postService = require('../services/postService');
-const { validateToken } = require('../auth/auth');
+const { verifyToken } = require('../auth/auth');
 
 const getPosts = async (_req, res) => {
     const posts = await postService.getPosts();
@@ -15,11 +15,10 @@ const getPostById = async (req, res) => {
 
 const createPost = async (req, res) => {
     try {
-        const { title, content, categoryIds } = req.body;
-        const { authorization } = req.headers;
-        const data = validateToken(authorization);
-
-        const userId = data.user.id;
+      const { title, content, categoryIds } = req.body;
+      const { authorization } = req.headers;
+      const data = verifyToken(authorization);
+      const userId = data.user.id;
         const newPost = await postService.createPost(userId, { title, content, categoryIds });
 
         return res.status(201).json(newPost.dataValues);
@@ -29,13 +28,12 @@ const createPost = async (req, res) => {
 };
 
 const updatePost = async (req, res) => {
-  const { id: userId } = req.params;
+  const { id } = req.params;
   const newContent = req.body;
-  await updatePost(userId, newContent);
-
-  const postUpdate = await getPostById(userId);
-  if (postUpdate === 'notfound') return res.status(404).json({ message: 'Post does not exist' }); 
-  return res.status(200).json(postUpdate);
+  
+  await postService.updatePost(id, newContent);
+  const postUpdated = await postService.getPostById(id);
+  return res.status(200).json(postUpdated);
 };
 
 const deletePost = async (req, res) => {  

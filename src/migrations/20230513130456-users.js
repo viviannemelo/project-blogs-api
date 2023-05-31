@@ -9,7 +9,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      display_name: {
+      displayName: {
+        field: 'display_name',
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -22,7 +23,11 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
       }
-     });
+     },
+    {
+      timestamps: false,
+    }
+     );
   },
 
   down: async (queryInterface, Sequelize) => {

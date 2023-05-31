@@ -15,7 +15,8 @@ module.exports = {
       content: {
         type: Sequelize.STRING,
       },
-      user_id: {
+      userId: {
+        field: 'user_id',
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -27,9 +28,11 @@ module.exports = {
       },
       published: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updated: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },
